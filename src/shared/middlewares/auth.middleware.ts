@@ -1,7 +1,7 @@
 // src/shared/middlewares/auth.middleware.ts
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { IApiResponse } from '../interfaces/response.interface.js';
+import type { IApiResponse } from '../interfaces/response.interface.js';
 
 // Extender los tipos de Express para admitir los datos del usuario autenticado
 export interface IAuthRequest extends Request {
@@ -30,9 +30,21 @@ export const authenticateJWT = (
   }
 
   const token = authHeader.split(' ')[1];
+  if (!token) {
+    const errorResponse: IApiResponse = {
+      success: false,
+      error: {
+        message: 'Acceso denegado: No se proporcionó un token de autenticación válido',
+        code: 'UNAUTHORIZED'
+      },
+      timestamp: new Date().toISOString()
+    };
+    res.status(401).json(errorResponse);
+    return;
+  }
 
   try {
-    const decoded = jwt.verify(token, SECRET_KEY) as { id: string; rol: string };
+    const decoded = jwt.verify(token, SECRET_KEY) as unknown as { id: string; rol: string };
     req.user = decoded; // Inyección de contexto seguro
     return next();
   } catch (error) {

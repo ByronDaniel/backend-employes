@@ -23,7 +23,8 @@ export const getEmpleadoById = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { id } = req.params;
+    const id = typeof req.params.id === 'string' ? req.params.id : '';
+    if (!id) throw new AppError(400, 'id es obligatorio');
     const empleado = await employeeRepository.findById(id);
 
     if (!empleado) throw new AppError(404, 'Empleado no encontrado');
@@ -57,7 +58,8 @@ export const updateEmpleado = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { id } = req.params;
+    const id = typeof req.params.id === 'string' ? req.params.id : '';
+    if (!id) throw new AppError(400, 'id es obligatorio');
     const empleado = await employeeRepository.update(id, req.body);
 
     if (!empleado) throw new AppError(404, 'Empleado no encontrado para actualizar');
@@ -76,7 +78,8 @@ export const deleteEmpleado = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { id } = req.params;
+    const id = typeof req.params.id === 'string' ? req.params.id : '';
+    if (!id) throw new AppError(400, 'id es obligatorio');
     const deleted = await employeeRepository.delete(id);
 
     if (!deleted) throw new AppError(404, 'Empleado no encontrado para eliminar');

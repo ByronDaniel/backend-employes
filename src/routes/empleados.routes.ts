@@ -23,11 +23,11 @@ router.post('/empleados', authenticateJWT, validateRequest(createEmpleadoSchema)
 router.put('/empleados/:id', authenticateJWT, validateRequest(updateEmpleadoSchema), updateEmpleado);
 router.delete('/empleados/:id', authenticateJWT, validateRequest(empleadoIdSchema), deleteEmpleado);
 
-// Alias para compatibilidad con la guía (/employees)
+// Rutas para Práctica 4 (Testing & Stress Test con Artillery)
 router.get('/employees', getEmpleados);
 router.get('/employees/:id', validateRequest(empleadoIdSchema), getEmpleadoById);
-router.post('/employees', authenticateJWT, validateRequest(createEmpleadoSchema), addEmpleado);
-router.put('/employees/:id', authenticateJWT, validateRequest(updateEmpleadoSchema), updateEmpleado);
-router.delete('/employees/:id', authenticateJWT, validateRequest(empleadoIdSchema), deleteEmpleado);
+router.post('/employees', validateRequest(createEmpleadoSchema), addEmpleado);
+router.put('/employees/:id', validateRequest(updateEmpleadoSchema), updateEmpleado);
+router.delete('/employees/:id', validateRequest(empleadoIdSchema), deleteEmpleado);
 
 export default router;

@@ -1,5 +1,5 @@
 // src/modules/auth/repositories/mongo-auth.repository.ts
-import { IAuthRepository } from './auth.repository.interface.js';
+import type { IAuthRepository } from './auth.repository.interface.js';
 import { UserModel } from '../models/user.model.js';
 
 export class MongoAuthRepository implements IAuthRepository {

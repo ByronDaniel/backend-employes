@@ -1,9 +1,9 @@
 // src/modules/auth/controllers/auth.controller.ts
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { IAuthRepository } from '../repositories/auth.repository.interface.js';
-import { IApiResponse } from '../../../shared/interfaces/response.interface.js';
+import type { IAuthRepository } from '../repositories/auth.repository.interface.js';
+import type { IApiResponse } from '../../../shared/interfaces/response.interface.js';
 
 export class AuthController {
   constructor(private authRepository: IAuthRepository) {}

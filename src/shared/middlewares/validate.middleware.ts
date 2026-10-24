@@ -1,20 +1,23 @@
 // src/shared/middlewares/validate.middleware.ts
 import type { Request, Response, NextFunction } from 'express';
-import { ZodTypeAny, ZodError } from 'zod';
-import { IApiResponse } from '../interfaces/response.interface.js';
+import type { ZodTypeAny } from 'zod';
+import { ZodError } from 'zod';
+import type { IApiResponse } from '../interfaces/response.interface.js';
 
 export const validateRequest = (schema: ZodTypeAny) => {
   return (req: Request, res: Response, next: NextFunction): void => {
     try {
-      const parsed = schema.parse({
+      const parsed: any = schema.parse({
         body: req.body,
         query: req.query,
         params: req.params,
       });
 
-      if (parsed.body) req.body = parsed.body;
-      if (parsed.params) req.params = parsed.params;
-      if (parsed.query) req.query = parsed.query;
+      if (parsed && typeof parsed === 'object') {
+        if ('body' in parsed && parsed.body) req.body = parsed.body;
+        if ('params' in parsed && parsed.params) req.params = parsed.params;
+        if ('query' in parsed && parsed.query) req.query = parsed.query;
+      }
 
       next();
     } catch (error) {
