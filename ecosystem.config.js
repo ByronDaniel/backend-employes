@@ -25,7 +25,7 @@ export const deploy = {
     ref: 'origin/main',
     repo: 'git@github.com:ByronDaniel/backend-employes.git',
     path: '/var/www/tu-app',
-    'post-deploy': 'mkdir -p logs && npm install && pm2 reload ecosystem.config.js --env production && pm2 save',
+    'post-deploy': 'mkdir -p logs && npm install && npm run build && pm2 reload ecosystem.config.js --env production && pm2 save',
     ssh_options: "IdentityFile=/Users/byrondelgado/Downloads/mi-servidor-web-key.pem" // Ruta a tu llave .pem local
   }
 };
