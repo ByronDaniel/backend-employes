@@ -22,12 +22,12 @@ module.exports = {
   deploy: {
     production: {
       user: 'ubuntu',
-      host: 'TU_IP_ELASTICA_AQUÍ',
+      host: '52.70.140.42',
       ref: 'origin/main',
-      repo: 'git@github.com:TU_USUARIO/TU_REPOSITORIO.git',
+      repo: 'git@github.com:ByronDaniel/backend-employes.git',
       path: '/var/www/tu-app',
-      'post-deploy': 'mkdir -p logs && npm install && pm2 reload ecosystem.config.js --env production&& pm2 save',
-      ssh_options: "IdentityFile=~/.ssh/mi-servidor-web-key.pem" // Ruta a tu llave .pem local
+      'post-deploy': 'mkdir -p logs && npm install && pm2 reload ecosystem.config.js --env production && pm2 save',
+      ssh_options: "IdentityFile=/Users/byrondelgado/Downloads/mi-servidor-web-key.pem" // Ruta a tu llave .pem local
     }
   }
 };
