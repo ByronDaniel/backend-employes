@@ -8,9 +8,8 @@ module.exports = {
     env: {
       NODE_ENV: "production",
       PORT: 3000,
-      DB_HOST: "://amazonaws.com",
-      DB_USER: "db_admin",
-      DB_PASS: "password_seguro_de_base_de_datos"
+      JWT_SECRET: "UnAHeXAdEcImAL_o_FrAsE_UlTrA_SeCrEtA_Y_LaRgA_2026",
+      MONGO_URI: "mongodb+srv://byrondanipm_db_user:mL1yknvwofC1vnwU@cluster0.qmugnvh.mongodb.net/usuarios_db?retryWrites=true&w=majority"
     },
     // Logs y Monitoreo del Servidor
     error_file: "/var/www/tu-app/logs/err.log",
